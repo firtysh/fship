@@ -1,11 +1,11 @@
 import React from 'react';
-
+import Navigationbar from './components/Navigationbar';
 
 function App() {
   return (
-    <div className="App">
-    Hello
-    </div>
+    <>
+    <Navigationbar />
+    </>
   );
 }
 
