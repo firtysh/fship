@@ -9,20 +9,29 @@ router.get('/', (req: Request, res: Response) => {
 router.post('/login', (req: Request, res: Response) => {
     res.send('Logged in!');
 });
-router.post('/signup', (req: Request, res: Response) => {
-    console.log(req.body); 
-    if(req.body.username){
+router.post('/register', (req: Request, res: Response) => {
+    // console.log(req.body.questions); 
+    if (req.body.username) {
         const user = new User({
             username: req.body.username,
             password: passwordGenarator(8),
+            questions: [...req.body.questions],
         });
         user.save().then((result) => {
-            res.status(201).json({message: 'User created!', user: {name:result.username,password:result.password,id:result._id}});
+            res.header("Access-Control-Allow-Headers", "*");
+            res.header('Access-Control-Allow-Credentials', "true");
+            res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+            res.status(201)
+                .cookie('name', result.username, {maxAge:30*24*60*60*1000, httpOnly: false, secure: true })
+                .cookie('password', result.password, {maxAge:30*24*60*60*1000, httpOnly: false, secure: true })
+                .cookie('id', result._id.toString(), {maxAge:30*24*60*60*1000, httpOnly: false, secure: true })
+                .cookie('isLoggedIn', true, {maxAge:30*24*60*60*1000, httpOnly: false, secure: true })
+                .json({ message: 'User created!', user: { name: result.username, password: result.password, id: result._id,isLoggedIn:true } });
         }).catch((err) => {
-            res.status(500).json({message: 'User creation failed!', error: err});
+            res.status(500).json({ message: 'User creation failed!', error: err });
         });
-    }else{
-        res.status(400).json({message: 'Username is required!'});
+    } else {
+        res.status(400).json({ message: 'Username is required!' });
     }
 });
 router.post('/logout', (req: Request, res: Response) => {
