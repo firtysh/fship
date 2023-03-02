@@ -5,9 +5,7 @@ import { FormData } from '../types'
 function RegistrationForm({ data,setData }: { data: FormData, setData: React.Dispatch<React.SetStateAction<FormData>> }) {
     const navigate = useNavigate()
     function handleStart(){
-        if(data.username===""){
-            console.log(data);
-            
+        if(data.username===""){           
             alert("Please enter your name")
         }else{
             navigate('/questions')

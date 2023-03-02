@@ -9,6 +9,8 @@ import QuestionForm from './components/QuestionForm';
 import { FormData } from './types';
 import Dashboard from './components/Dashboard';
 import RequireAuth from './components/RequireAuth';
+import Quiz from './components/Quiz';
+import Footer from './components/Footer';
 
 
 
@@ -21,7 +23,7 @@ function App() {
 
   
   return (
-    <>
+    <><div className='min-h-screen bg-slate-300 relative max-h-max'>
       <Navigationbar />
       <Routes>
         <Route path='/' element={<Navigate to="/register" replace/>} />
@@ -29,8 +31,11 @@ function App() {
         <Route path='/questions' element={<QuestionForm data={data} setData={setData} />} />
         <Route path='/login' element={<Auth><LoginForm /></Auth>} />
         <Route path='/user/:id' element={<RequireAuth> <Dashboard/></RequireAuth>} />
+        <Route path='/quiz/:id' element={ <Quiz/>} />
       </Routes>
       <Faq />
+      <Footer/>
+      </div>
     </>
   );
 }

@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser'
 import authRoutes from './routes/authRoutes.js';
+import dataRoutes from './routes/dataRoutes.js';
 import db from './db/connection.js';
 db.once('open', () => {
     console.log('Database connected !');
@@ -19,7 +20,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/api', authRoutes);
-
+app.use('/api',dataRoutes)
 
 app.listen(5000, () => {
     console.log('Server started on port 5000');

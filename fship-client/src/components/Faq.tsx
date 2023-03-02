@@ -2,8 +2,8 @@ import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
 export default function Faq() {
   return (
-    <div className="w-full bg-slate-300 p-3">
-      <div className="mx-auto  md:w-1/2 border p-6 my-4 rounded-lg bg-white ">
+    <div className="w-full bg-slate-300 p-3 ">
+      <div className="mx-auto  md:w-1/2 border p-6 my-4 mb-20 rounded-lg bg-white ">
         <Disclosure>
           {({ open }) => (
             <>

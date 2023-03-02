@@ -4,10 +4,10 @@ import { remove } from 'react-cookies'
 function Navigationbar() {
 	const { auth, setAuth }	= useAuth();
 	function handleLogout(){
-		remove('name');
-		remove('id');
-		remove('password');
-		remove('isLoggedIn');
+		remove('name', { path: '/' });
+		remove('id', { path: '/' });
+		remove('password', { path: '/' });
+		remove('isLoggedIn', { path: '/' });
 		setAuth({name:'',id:'',password:'',isLoggedIn:false});
 	}
 	return (
