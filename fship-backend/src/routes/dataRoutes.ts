@@ -3,6 +3,7 @@ import User from '../models/user.js';
 const router: Router = express.Router();
 
 router.post('/response', (req: Request, res: Response) => {
+    console.log("/response" + req.body.id);
     if (req.body.id && req.body.password) {
         User.find({ _id: req.body.id }).then((result) => {
             if (result[0]?.password === req.body.password) {
@@ -17,6 +18,7 @@ router.post('/response', (req: Request, res: Response) => {
     }
 });
 router.post('/response/add', (req: Request, res: Response) => {
+    console.log("/response/add" + req.body.id)
     if (req.body.id && req.body.response) {
         User.find({ _id: req.body.id }).then((result) => {
             result[0]?.response.push(req.body.response);
@@ -32,6 +34,8 @@ router.post('/response/add', (req: Request, res: Response) => {
 })
 
 router.post('/questions', (req: Request, res: Response) => {
+    console.log("/questions" + req.body.id);
+    
     if(req.body.id){
         User.find({_id:req.body.id})
         .then((result)=>{

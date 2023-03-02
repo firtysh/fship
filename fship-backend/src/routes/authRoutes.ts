@@ -11,6 +11,8 @@ router.post('/login', (req: Request, res: Response) => {
 });
 router.post('/register', (req: Request, res: Response) => {
     // console.log(req.body.questions); 
+    console.log("/register" + req.body.username);
+    
     if (req.body.username) {
         const user = new User({
             username: req.body.username,
@@ -22,10 +24,10 @@ router.post('/register', (req: Request, res: Response) => {
             res.header('Access-Control-Allow-Credentials', "true");
             res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
             res.status(201)
-                .cookie('name', result.username, {maxAge:30*24*60*60*1000, httpOnly: false, secure: true })
-                .cookie('password', result.password, {maxAge:30*24*60*60*1000, httpOnly: false, secure: true })
-                .cookie('id', result._id.toString(), {maxAge:30*24*60*60*1000, httpOnly: false, secure: true })
-                .cookie('isLoggedIn', true, {maxAge:30*24*60*60*1000, httpOnly: false, secure: true })
+                .cookie('name', result.username, {maxAge:30*24*60*60*1000, httpOnly: false, secure: true ,path:'/'})
+                .cookie('password', result.password, {maxAge:30*24*60*60*1000, httpOnly: false, secure: true ,path:'/'})
+                .cookie('id', result._id.toString(), {maxAge:30*24*60*60*1000, httpOnly: false, secure: true ,path:'/'})
+                .cookie('isLoggedIn', true, {maxAge:30*24*60*60*1000, httpOnly: false, secure: true, path:'/' })
                 .json({ message: 'User created!', user: { name: result.username, password: result.password, id: result._id,isLoggedIn:true } });
         }).catch((err) => {
             res.status(500).json({ message: 'User creation failed!', error: err });
