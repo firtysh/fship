@@ -18,7 +18,7 @@ function QuestionForm({ data, setData }: { data: FormData, setData: React.Dispat
 				setAuth(res.user)
 				save("name", res.user.name, { path: "/" })
 				save("id", res.user.id, { path: "/" })
-				save("isLogged", 'true', { path: "/" })
+				save("isLoggedIn", 'true', { path: "/" })
 				save("password", res.user.password, { path: "/" })
 				navigate(`/user/${res.user.id}`)
 			}).catch((err) => {
