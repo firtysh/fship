@@ -3,6 +3,7 @@ import { questionsData } from '../data/questionsData'
 import { useNavigate, Navigate } from 'react-router-dom'
 import { FormData } from '../types'
 import { register } from '../api/register';
+import { save } from "react-cookies"
 import useAuth from '../hooks/useAuth';
 function QuestionForm({ data, setData }: { data: FormData, setData: React.Dispatch<React.SetStateAction<FormData>> }) {
 	const { setAuth } = useAuth()
@@ -15,6 +16,10 @@ function QuestionForm({ data, setData }: { data: FormData, setData: React.Dispat
 			setLoading(true)
 			register(data).then((res) => {
 				setAuth(res.user)
+				save("name", res.user.name, { path: "/" })
+				save("id", res.user.id, { path: "/" })
+				save("isLogged", 'true', { path: "/" })
+				save("password", res.user.password, { path: "/" })
 				navigate(`/user/${res.user.id}`)
 			}).catch((err) => {
 				console.log(err);
