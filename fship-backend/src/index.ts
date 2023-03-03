@@ -9,7 +9,7 @@ db.once('open', () => {
 });
 const app: Express = express();
 app.use(cors({
-    origin: 'https://fship.vercel.app',
+    origin: true,
     credentials: true,
 }));
 app.use(express.urlencoded({ extended: true }))
