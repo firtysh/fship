@@ -13,9 +13,10 @@ function Quiz() {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [response, setResponse] = useState({ name: "", score: score })
+  const [clicked, setClicked] = useState(false);
   const urlId = useParams().id || "";
   const { auth } = useAuth()
-  
+
   useEffect(() => {
     if (showResult) {
       sendResponse(urlId, { ...response, score }).then((res) => {
@@ -32,16 +33,25 @@ function Quiz() {
   }
   const handleNext = (correct: Boolean) => {
 
+
     if (correct) {
       setScore((prev) => prev + 1);
+    }
 
-    }
-    if (qindex < questionsData.length - 1) {
+    if (qindex === -1) {
       setqIndex((prev) => prev + 1);
-    } else {
-      setqIndex((prev) => prev);
-      setShowResult(true);
+      return;
     }
+    setClicked(true);
+    timeout(500).then(() => {
+      setClicked(false);
+      if (qindex < questionsData.length - 1) {
+        setqIndex((prev) => prev + 1);
+      } else {
+        setShowResult(true);
+      }
+    })
+
 
   }
 
@@ -52,7 +62,7 @@ function Quiz() {
     })
   }, [])
   if (urlId === auth.id) {
-    return <Navigate to={`/user/${auth.id}`}/>
+    return <Navigate to={`/user/${auth.id}`} />
   }
   if (loading) {
     return <div className="flex justify-center items-center h-screen">Loading</div>
@@ -70,10 +80,10 @@ function Quiz() {
               <label className='block text-gray-700 text-base font-bold mb-2' htmlFor='username'>
                 Enter Your Full Name
               </label>
-              <input required onChange={(e) => { handleChange(e) }} className='shadow appearance-none border rounded w-full outline-none py-2 px-3 text-gray-700 leading-tight' id='username' type='text' placeholder='Full Name' />
+              <input required onChange={(e) => { handleChange(e) }} className='shadow appearance-none border rounded w-full outline-none py-2 px-3 text-gray-700 leading-tight ' id='username' type='text' placeholder='Full Name' />
             </div>
             <div className='flex items-center justify-between'>
-              <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full outline-none ' type='submit'>
+              <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full outline-none ' type='submit' >
                 Start
               </button>
             </div>
@@ -86,7 +96,7 @@ function Quiz() {
           <div className='flex items-center flex-wrap p-3 border'>
             {questionsData[qindex].options.map((option) => {
               return (
-                <button onClick={(e) => { handleNext(option.isCorrect) }} key={option.option} className={`min-w-fit w-full shadow-lg flex rounded bg-blue-100 text-blue-700 font-bold outline-none my-2`} type='button'>
+                <button onClick={(e) => { handleNext(option.isCorrect) }} key={option.option} className={`min-w-fit w-full shadow-lg flex rounded ${clicked && option.isCorrect ? 'bg-green-100' : 'bg-blue-100'}  text-blue-700 font-bold outline-none my-2 ${clicked && 'pointer-events-none'} `} type='button'>
                   {(option.image !== "") && <img className='rounded max-w-[110px] max-h-[70px] h-[70px]' src={option.image} alt="" />}
 
                   <div className='m-auto p-3'>{option.option}</div>

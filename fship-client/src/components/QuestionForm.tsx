@@ -16,10 +16,10 @@ function QuestionForm({ data, setData }: { data: FormData, setData: React.Dispat
 			setLoading(true)
 			register(data).then((res) => {
 				setAuth(res.user)
-				save("name", res.user.name, { path: "/" })
-				save("id", res.user.id, { path: "/" })
-				save("isLoggedIn", 'true', { path: "/" })
-				save("password", res.user.password, { path: "/" })
+				save("name", res.user.name, { path: "/",maxAge:30*24*60*60 })
+				save("id", res.user.id, { path: "/",maxAge:30*24*60*60 })
+				save("isLoggedIn", 'true', { path: "/",maxAge:30*24*60*60 })
+				save("password", res.user.password, { path: "/",maxAge:30*24*60*60 })
 				navigate(`/user/${res.user.id}`)
 			}).catch((err) => {
 				console.log(err);
