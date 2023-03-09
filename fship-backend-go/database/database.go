@@ -3,9 +3,9 @@ package database
 import (
 	"context"
 	"fmt"
-	"go.mongodb.org/mongo-driver/mongo"
-    "go.mongodb.org/mongo-driver/mongo/options"
 	"fship-server/config"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func Connect() *mongo.Client {
