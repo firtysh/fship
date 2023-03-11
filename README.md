@@ -18,33 +18,35 @@
 <p align="center"> The FShip App is a web-based application that allows users to create and share quizzes with their friends. With customizable questions and answers, images, and gifs, our app makes it simple and entertaining to create a quiz and challenge your friends.
 </p>
 
+---
 
 <div id="Feature"></div>
 
 ## **Features**
----
 * User-friendly interface for creating quizzes.
 * Easy sharing via email, social media, or messaging apps.
 * Real-time tracking of quiz results and scores.
 
+---
+
 <div id="GettingStarted"></div>
 
 ## **Getting Started**
----
 
 To use the FShip App, simply sign up for an account and create your profile. From there, you can start creating your quiz by adding questions and answers. Once your quiz is complete, you can share it with your friends and track their progress in real-time.
 
+---
 <div id="Contributors"></div>
 
 ## **Contributors**
----
 
 ![Contributors](https://contributors-img.web.app/image?repo=firtysh/fship)
+
+---
 
 <div id="Feedback"></div>
 
 ## **Feedback and support**
----
 If you have any feedback or suggestions for the App, please don't hesitate to contact us. we welcome all feedback and suggestions.
 Or you can create a  <a href="https://github.com/firtysh/fship/issues">issue</a> and mention there , which new features can make this Project more good.
 <br>
